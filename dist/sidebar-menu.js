@@ -10,7 +10,7 @@ $.fn.extend({
           checkElement.slideUp(animationSpeed, function () {
             checkElement.removeClass('menu-open');
           });
-          checkElement.parent("li").removeClass("active");
+          checkElement.parent("li").removeClass("opened");
         }
         else if ((checkElement.is('.treeview-menu')) && (!checkElement.is(':visible'))) {
           var parent = $this.parents('ul').first();
@@ -20,7 +20,7 @@ $.fn.extend({
           checkElement.slideDown(animationSpeed, function () {
             checkElement.addClass('menu-open');
           });
-            parent_li.addClass('active').siblings('li').removeClass('active');
+            parent_li.addClass('opened').siblings('li').removeClass('opened');
         }
       if (checkElement.is('.treeview-menu')) {
           e.preventDefault();
@@ -32,11 +32,13 @@ $.fn.extend({
         if($ul.is('.sidebar-menu')){
           $ul.find('ul:visible').slideUp(animationSpeed,function () {
             $(this).removeClass('menu-open');
+            $(this).parent().removeClass('opened');
           });
           $ul.find('.active').removeClass('active');
           $li.addClass('active');
         }else {
           $li.addClass('active').siblings().removeClass('active');
+          $ul.parent('li').siblings('.active').removeClass('active');
           $ul.parent('li').siblings().find('.active').removeClass('active');
         }
       }

@@ -122,6 +122,10 @@
     color: #0a81b1;
     background: #f3f3f3;
 }
+.skin-blue .sidebar > .sidebar-menu > li.opened > a {
+  color: red;
+  background: #f3f3f3;
+}
 .skin-blue .sidebar > .sidebar-menu > li > .treeview-menu {
     margin: 0 1px;
     padding-left: 8px;
@@ -209,7 +213,9 @@
     background-color: #f4f4f4;
     overflow: hidden;
 }
-
+.sidebar .label {
+  margin-right: 8px;
+}
 .sidebar li a:focus {
     text-decoration: none;
 }
@@ -219,6 +225,6 @@
     margin-right: .3em;
     margin-top: .3em;
 }
-.sidebar .active > a > .fa-angle-right {
+.sidebar .opened > a > .fa-angle-right {
     transform: rotate(90deg);
 }
