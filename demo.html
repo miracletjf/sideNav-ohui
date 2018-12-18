@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>侧边菜单导航</title>
+  <link rel="stylesheet" href="dist/bootstrap.min.css">
+  <link href="./fontAwesome/css/font-awesome.min.css" rel="stylesheet" media="screen">
+  <link rel="stylesheet" href="dist/sidebar-menu.css">
+</head>
+<body>
+  <aside class="main-sidebar skin-blue" id="asideMenu"></aside>
+  <script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>
+  <script src="dist/sidebar-menu.js"></script>
+  <script>
+    $.ajax({
+      url: './dist/menu.json',
+      success: function (data) {
+        console.log(data);
+        $('#asideMenu').append(compileSideJson(data));
+        $('#asideMenu').find('.sidebar-menu').sidebarMenu();
+      }
+    })
+
+    function compileSideJson(datas) {
+      var resHtml = '';
+      resHtml += datas.reduce(function (res,item) {
+        res += complateHtml('header',item);
+        res += complateHtml('menus',item.menus);
+        return res;
+      },'');
+      return '<div class="sidebar"><ul class="sidebar-menu">'+resHtml+'</ul></div>';
+    }
+    
+    function complateHtml(type,obj) {
+      var resHtml = '';
+      switch (type) {
+        case 'header':
+          resHtml += '<li class="header">'+obj.title+'</li>';
+          break;
+        case 'menus':
+          resHtml += obj.reduce(function (res,item) {
+            if(item.children) {
+              res += complateHtml('submenu',item);
+            }else {
+              res += complateHtml('node',item)
+            }
+            return res;
+          },'');
+          break;
+        case 'submenu':
+          resHtml += '<li class="treeview"><a href="#">';
+          if(obj.icon){
+           resHtml += '<i class="fa fa-'+obj.icon+'"></i> <span>'+obj.name+'</span>';
+          }else{
+            resHtml += '<i class="fa fa-circle-o"></i> <span>'+obj.name+'</span>';
+          }
+          resHtml += '<i class="fa fa-angle-right pull-right"></i></a>';
+          resHtml += '<ul class="treeview-menu">';
+          resHtml += obj.children.reduce(function (res,item) {
+            res += complateHtml('node',item);
+            return res;
+          },'');
+          resHtml += '</ul></li>';
+          break;
+        case 'node':
+          resHtml += '<li>';
+          if(obj.url){
+            resHtml += '<a href="'+obj.url+'">';
+          }else {
+            resHtml += '<a href="#">';
+          }
+          if(obj.icon){
+            resHtml += '<i class="fa fa-'+obj.icon+'"></i>';
+          }else {
+            resHtml += '<i class="fa fa-circle-o"></i>';
+          }
+          resHtml += '<span>'+obj.name+'</span></a></li>';
+          break;
+      }
+      return resHtml;
+    }
+  </script>
+</body>
+</html>

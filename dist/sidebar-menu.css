@@ -123,7 +123,7 @@
     background: #f3f3f3;
 }
 .skin-blue .sidebar > .sidebar-menu > li.opened > a {
-  color: red;
+  color: #0a81b1;
   background: #f3f3f3;
 }
 .skin-blue .sidebar > .sidebar-menu > li > .treeview-menu {
@@ -202,17 +202,6 @@
     border-bottom-right-radius: 2px !important;
     border-bottom-left-radius: 0 !important;
 }
-
-.main-sidebar{
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 230px;
-    z-index: 810;
-    background-color: #f4f4f4;
-    overflow: hidden;
-}
 .sidebar .label {
   margin-right: 8px;
 }
@@ -227,4 +216,15 @@
 }
 .sidebar .opened > a > .fa-angle-right {
     transform: rotate(90deg);
+}
+
+.main-sidebar{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 230px;
+    z-index: 810;
+    background-color: #f4f4f4;
+    overflow: hidden;
 }
